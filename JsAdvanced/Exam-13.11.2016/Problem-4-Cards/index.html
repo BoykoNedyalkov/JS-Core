@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cards</title>
+    <style>
+        div.card {
+            display: inline-block; padding: 10px; margin: 10px;
+            width: 50px; height: 80px; background: #EEE;
+            border: 3px solid #DDD; border-radius: 5px;
+            font-size: 18pt; text-align: center; line-height: 75px;
+        }
+    </style>
+    <script src="../jquery-3.1.1.js"></script>
+</head>
+<body>
+<div id="main"></div>
+<script>
+    function cardDeckBuilder(selector) {
+        return{
+            addCard(face, suit) {
+                let pesho = $(`<div class="card">`);
+                let faces = ["2", "3", "4", "5", "6", "7", "8", "9", "10", 'J', "Q", "K", "A"];
+                let suits = ["C","D","H","S"];
+                let faceString = '';
+                let suitString = '';
+                for(let item of faces){
+                    if(item == face){
+                        console.log(face);
+                       faceString = face;
+                    }
+                }
+                for(let item of suits){
+                    if(item == suit){
+                        switch (suit){
+                            case 'C':  suitString  = '\u2663'
+                                break;
+                            case 'D': suitString = '\u2666'
+                                break;
+                            case 'H': suitString = '\u2665'
+                                break;
+                            case 'S': suitString = '\u2660'
+                                break;
+                            default:
+                                    break;
+                        }
+                    }
+                }
+                pesho.on('click',function () {
+                   let list = $(selector).children('div');
+                    $(selector).append(list.get().reverse())
+                });
+                $(pesho).text(`${faceString} ${suitString}`);
+                if(faceString.length > 0 && suitString.length >0){
+                    $(pesho).appendTo($(selector))
+                }
+            }
+        }
+    }
+</script>
+<script>
+    $(function() {
+        let builder = cardDeckBuilder("#main");
+        builder.addCard("10", "D");
+        builder.addCard("K", "S");
+        builder.addCard("Q", "H");
+        builder.addCard("4", "C");
+    });
+</script>
+</body>
+</html>
