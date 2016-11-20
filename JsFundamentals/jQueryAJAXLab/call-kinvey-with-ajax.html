@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="scripts/libs/jquery-3.0.0.min.js"></script>
+    <title>Call Kinvey with AJAX</title>
+</head>
+<button id="loadPosts">Load Posts from Kinvey</button>
+<body>
+    <script>
+        $('#loadPosts').click(function () {
+            let USERNAME = "Pesho" , PASSWORD = "123456"
+            let authBase64 = btoa(USERNAME + ":" + PASSWORD)
+            $.ajax({
+                method: "GET",
+                url:"https://baas.kinvey.com/appdata/kid_HkxFD4bPB/posts",
+                headers: {"Authorization": "Basic " + authBase64},
+                success: showPosts,
+                error: showError
+            });
+        })
+        function showPosts(data,status) {
+            let ul = $('<ul>');
+            for (let post of data){
+                ul.append($('<li>').text(post.title + " -> " + post.body));
+            }
+            $('body').append(ul);
+        }
+        function showError(data,status) {
+            let errorMsg = "Error: " + JSON.stringify(data);
+            $('body').append($('<div>').text(errorMsg))
+        }
+    </script>
+</body>
+</html>

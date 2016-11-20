@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coutries Table</title>
+    <script src="scripts/libs/jquery-3.0.0.min.js"></script>
+    <script src="scripts/countriesTableScript.js"></script>
+</head>
+<body>
+    <h1>Countries</h1>
+    <table id="countriesTable">
+        <tr><th>Country</th><th>Capital</th><th>Action</th></tr>
+    </table>
+    <br>
+    Country: <input type="text" id="newCountryText">
+    Capital: <input type="text" id="newCapitalText">
+    <input type="button" onclick="addCountry()" value="Add County">
+    <style>
+        td, th {background: #DDD ; padding: 5px 10px }
+    </style>
+</body>
+</html>
